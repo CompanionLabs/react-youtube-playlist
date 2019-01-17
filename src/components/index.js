@@ -118,17 +118,6 @@ class YouTubePlaylist extends React.Component {
         className={`${container_class || ''}`}
         style={{width}}
         >
-        <div className={`iframe-container ${iframe_container_class || ''}`}>
-          <iframe
-            id='player'
-            height={this.state.iframe_height}
-            frameBorder={frame_border || '0'}
-            src={`https://www.youtube.com/embed/${this.state.video_id}?enablejsapi=1?playlist=${this.props.playlist_id}`}
-            style={{width : '100%'}}
-            allowFullScreen
-            scrolling={`${'yes' || scrolling}`}
-          />
-        </div>
         <div
           id='outer-video-list-container'
           className={`${video_list_container_class || ''}`}
@@ -148,6 +137,17 @@ class YouTubePlaylist extends React.Component {
               height={height}
             />
           )}
+        </div>
+        <div className={`iframe-container ${iframe_container_class || ''}`}>
+          <iframe
+            id='player'
+            height={this.state.iframe_height}
+            frameBorder={frame_border || '0'}
+            src={`https://www.youtube.com/embed/${this.state.video_id}?enablejsapi=1?playlist=${this.props.playlist_id}`}
+            style={{width : '100%'}}
+            allowFullScreen
+            scrolling={`${'yes' || scrolling}`}
+          />
         </div>
       </div>
     )
