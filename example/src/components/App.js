@@ -1,5 +1,5 @@
 import React from 'react';
-import YouTubePlaylist from 'react-youtube-playlist';
+import YouTubePlaylist from '../../../dist';
 import '../../../dist/styles.scss';
 
 import './styles.scss';
@@ -7,8 +7,8 @@ import './styles.scss';
 const App = () => {
   return (
     <YouTubePlaylist
-      api_key="AIzaSyAgqLIxOST5fML1Ywg_xW6F5ttvnjSqjqQ"
-      playlist_id="PL64BwQcJEEVImdziHEAlXzb5Zhzs1KNKT"
+      api_key="AIzaSyBRKbR9hS9678OzzL0Ju7XjLZPISRpKnwY"
+      playlist_id="PLCP9GgzdebSIUq_GmmRU_OdmDhSLBC5lP"
       show_thumbnails
       width="800px"
       height="600px"

@@ -84,7 +84,9 @@ class YouTubePlaylist extends React.Component {
           });
         }
       })
-      .catch(e => {console.log(e.message || e)});
+      .catch((e) => {
+        console.error('componentDidMount:err', e);
+      });
     }
 
     this.setState({iframe_height : height ? getHeight(height) : this.state.height});

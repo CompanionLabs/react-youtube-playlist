@@ -106,7 +106,7 @@ var YouTubePlaylist = function (_React$Component) {
             });
           }
         }).catch(function (e) {
-          console.log(e.message || e);
+          console.error('componentDidMount:err', e);
         });
       }
 

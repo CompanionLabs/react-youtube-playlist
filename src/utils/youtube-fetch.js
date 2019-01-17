@@ -25,6 +25,7 @@ const youTubeFetch = async (playlist_id, api_key, page_token) => {
     return await result.json();
   }
   catch(e) {
+    console.error('youTubeFetch:error', e);
     throw new Error(e)
   }
 }

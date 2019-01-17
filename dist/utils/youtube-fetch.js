@@ -60,9 +60,11 @@ var youTubeFetch = function () {
           case 16:
             _context.prev = 16;
             _context.t0 = _context['catch'](1);
+
+            console.error('youTubeFetch:error', _context.t0);
             throw new Error(_context.t0);
 
-          case 19:
+          case 20:
           case 'end':
             return _context.stop();
         }
