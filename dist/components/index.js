@@ -153,7 +153,7 @@ var YouTubePlaylist = function (_React$Component) {
             className: '' + (video_list_container_class || ''),
             style: video_list_style
           },
-          this.state.fetching ? null : _react2.default.createElement(_videoList2.default, {
+          !this.state.fetching && this.state.video_id && _react2.default.createElement(_videoList2.default, {
             initial_video_list: this.state.initial_video_list,
             current_video_id: this.state.video_id,
             handleChange: function handleChange(v) {

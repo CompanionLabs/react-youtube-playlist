@@ -123,7 +123,8 @@ class YouTubePlaylist extends React.Component {
           className={`${video_list_container_class || ''}`}
           style={video_list_style}
           >
-          {this.state.fetching ? null : (
+          {!this.state.fetching &&
+          this.state.video_id && (
             <VideoList
               initial_video_list={this.state.initial_video_list}
               current_video_id={this.state.video_id}
