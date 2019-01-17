@@ -119,7 +119,7 @@ class VideoList extends React.Component {
             style={{height : this.state.inner_video_list_container_height}}
             >
             {this.state.filtered_video_list.map(v => {
-              const {url} = v.snippet.thumbnails ? v.snippet.thumbnails.default : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg';
+              const {url} = v.snippet.thumbnails ? v.snippet.thumbnails.medium : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg';
               const {title} = v.snippet;
               const {videoId} = v.snippet.resourceId;
 
