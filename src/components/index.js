@@ -136,7 +136,7 @@ class YouTubePlaylist extends React.Component {
 
 YouTubePlaylist.defaultProps = {
   TooltipComp: null,
-  tooltipPlacement: 'Top',
+  tooltipPlacement: 'Right',
 }
 
 YouTubePlaylist.propTypes = {
@@ -157,7 +157,7 @@ YouTubePlaylist.propTypes = {
   video_list_container_class: PropTypes.string,
   scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
   TooltipComp: PropTypes.any,
-  tooltipPlacement: PropTypes.string,
+  tooltipPlacement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 }
 
 export default YouTubePlaylist;

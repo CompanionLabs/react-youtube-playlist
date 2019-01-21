@@ -137,7 +137,8 @@ var VideoList = function (_React$Component) {
           handleChange = _props2.handleChange,
           show_thumbnails = _props2.show_thumbnails,
           current_video_id = _props2.current_video_id,
-          TooltipComp = _props2.TooltipComp;
+          TooltipComp = _props2.TooltipComp,
+          tooltipPlacement = _props2.tooltipPlacement;
 
 
       return _react2.default.createElement(
@@ -169,40 +170,44 @@ var VideoList = function (_React$Component) {
               var videoId = v.snippet.resourceId.videoId;
 
               return _react2.default.createElement(
-                'div',
-                {
-                  className: 'video-container',
-                  onClick: function onClick() {
-                    handleChange(videoId);
-                  },
-                  id: 'video-container-' + v.id
-                },
+                _react2.default.Fragment,
+                null,
                 _react2.default.createElement(
                   'div',
                   {
-                    id: v.id,
-                    className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
+                    className: 'video-container',
+                    onClick: function onClick() {
+                      handleChange(videoId);
+                    },
+                    id: 'video-container-' + v.id
                   },
-                  show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
                   _react2.default.createElement(
                     'div',
-                    { className: 'video-info' },
+                    {
+                      id: v.id,
+                      className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
+                    },
+                    show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
                     _react2.default.createElement(
-                      'span',
-                      { className: 'video-info__title' },
-                      title
-                    ),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'video-info__description' },
-                      description
+                      'div',
+                      { className: 'video-info' },
+                      _react2.default.createElement(
+                        'span',
+                        { className: 'video-info__title' },
+                        title
+                      ),
+                      _react2.default.createElement(
+                        'span',
+                        { className: 'video-info__description' },
+                        description
+                      )
                     )
-                  ),
-                  TooltipComp && _react2.default.createElement(
-                    TooltipComp,
-                    { placement: 'top', target: 'video-container-' + v.id },
-                    description
                   )
+                ),
+                TooltipComp && _react2.default.createElement(
+                  TooltipComp,
+                  { placement: tooltipPlacement, target: 'video-container-' + v.id },
+                  description
                 )
               );
             })

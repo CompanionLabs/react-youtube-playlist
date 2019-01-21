@@ -166,7 +166,8 @@ var YouTubePlaylist = function (_React$Component) {
             playlist_id: this.props.playlist_id,
             next_page_token: this.state.next_page_token,
             height: height,
-            TooltipComp: TooltipComp
+            TooltipComp: TooltipComp,
+            tooltipPlacement: tooltipPlacement
           })
         ),
         _react2.default.createElement(
@@ -190,7 +191,8 @@ var YouTubePlaylist = function (_React$Component) {
 }(_react2.default.Component);
 
 YouTubePlaylist.defaultProps = {
-  TooltipComp: null
+  TooltipComp: null,
+  tooltipPlacement: 'Right'
 };
 
 YouTubePlaylist.propTypes = {
@@ -204,7 +206,8 @@ YouTubePlaylist.propTypes = {
   iframe_container_class: _propTypes2.default.string,
   video_list_container_class: _propTypes2.default.string,
   scrolling: _propTypes2.default.oneOf(['yes', 'no', 'auto']),
-  TooltipComp: _propTypes2.default.any
+  TooltipComp: _propTypes2.default.any,
+  tooltipPlacement: _propTypes2.default.oneOf(['top', 'right', 'bottom', 'left'])
 };
 
 exports.default = YouTubePlaylist;
