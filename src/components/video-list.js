@@ -79,7 +79,14 @@ class VideoList extends React.Component {
   }
 
   render() {
-    const {handleChange, show_thumbnails, current_video_id, TooltipComp, tooltipPlacement} = this.props;
+    const {
+      handleChange,
+      show_thumbnails,
+      current_video_id,
+      TooltipComp,
+      tooltipPlacement,
+      tooltipClassName
+    } = this.props;
 
     return (
       <div>
@@ -118,7 +125,7 @@ class VideoList extends React.Component {
                     </div>
                   </div>
                   { TooltipComp && (
-                    <TooltipComp placement={tooltipPlacement} target={`video-container-${v.id}`}>
+                    <TooltipComp placement={tooltipPlacement} target={`video-container-${v.id}`} className={tooltipClassName}>
                       {description}
                     </TooltipComp>
                   )}

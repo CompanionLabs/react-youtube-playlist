@@ -86,6 +86,7 @@ class YouTubePlaylist extends React.Component {
       scrolling,
       TooltipComp,
       tooltipPlacement,
+      tooltipClassName,
     } = this.props;
 
     const video_list_style = this.state.small_screen ? {minHeight : '20px'} : {height : `${this.state.iframe_height}px`};
@@ -116,6 +117,7 @@ class YouTubePlaylist extends React.Component {
               height={height}
               TooltipComp={TooltipComp}
               tooltipPlacement={tooltipPlacement}
+              tooltipClassName={tooltipClassName}
             />
           )}
         </div>
@@ -138,6 +140,7 @@ class YouTubePlaylist extends React.Component {
 YouTubePlaylist.defaultProps = {
   TooltipComp: null,
   tooltipPlacement: 'right',
+  tooltipClassName: '',
 }
 
 YouTubePlaylist.propTypes = {
@@ -158,6 +161,7 @@ YouTubePlaylist.propTypes = {
   video_list_container_class: PropTypes.string,
   scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
   TooltipComp: PropTypes.any,
+  tooltipClassName: PropTypes.string,
   tooltipPlacement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 }
 

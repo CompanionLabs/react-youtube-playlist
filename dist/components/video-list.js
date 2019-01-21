@@ -138,7 +138,8 @@ var VideoList = function (_React$Component) {
           show_thumbnails = _props2.show_thumbnails,
           current_video_id = _props2.current_video_id,
           TooltipComp = _props2.TooltipComp,
-          tooltipPlacement = _props2.tooltipPlacement;
+          tooltipPlacement = _props2.tooltipPlacement,
+          tooltipClassName = _props2.tooltipClassName;
 
 
       return _react2.default.createElement(
@@ -206,7 +207,7 @@ var VideoList = function (_React$Component) {
                 ),
                 TooltipComp && _react2.default.createElement(
                   TooltipComp,
-                  { placement: tooltipPlacement, target: 'video-container-' + v.id },
+                  { placement: tooltipPlacement, target: 'video-container-' + v.id, className: tooltipClassName },
                   description
                 )
               );
