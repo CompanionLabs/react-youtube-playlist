@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import VideoList from './video-list';
+import YouTube from 'react-youtube';
 import $ from 'jquery';
 import {
   youTubeFetch,
   getHeight
- } from 'utils';
+} from 'utils';
+import VideoList from './video-list';
 
  let is_mounted = false;
 
@@ -18,7 +19,12 @@ class YouTubePlaylist extends React.Component {
     total_results_count : 0,
     iframe_width : 640,
     iframe_height : 390,
-    small_screen : window.innerWidth < 980
+    small_screen : window.innerWidth < 980,
+    playerOpts: {
+      playerVars: {
+        autoplay: 0
+      }
+    }
   }
 
   handleResize = (e) => {
@@ -28,6 +34,36 @@ class YouTubePlaylist extends React.Component {
       }
       else if(e.target.innerWidth <= 980 && !this.state.small_screen) {
         this.setState({small_screen : true});
+      }
+    }
+  }
+
+  onStateChange = (state) => {
+    const endOfVideo = state.data === 0;
+
+    if (endOfVideo) {
+      const { initial_video_list, video_id } = this.state;
+      if (initial_video_list && video_id) {
+        let nextIndex = null;
+
+        initial_video_list.forEach((vid, currIndex) => {
+          if (vid.snippet.resourceId.videoId === video_id) {
+            nextIndex = currIndex === initial_video_list.length - 1
+              ? null
+              : currIndex + 1;
+          }
+        });
+
+        if (nextIndex) {
+          this.setState({
+            video_id: initial_video_list[nextIndex].snippet.resourceId.videoId,
+            playerOpts: {
+              playerVars: {
+                autoplay: 1,
+              }
+            }
+          });
+        }
       }
     }
   }
@@ -89,6 +125,10 @@ class YouTubePlaylist extends React.Component {
       tooltipClassName,
     } = this.props;
 
+    const {
+      playerOpts,
+    } = this.state;
+
     const video_list_style = this.state.small_screen ? {minHeight : '20px'} : {height : `${this.state.iframe_height}px`};
 
     return (
@@ -122,15 +162,15 @@ class YouTubePlaylist extends React.Component {
           )}
         </div>
         <div className={`iframe-container ${iframe_container_class || ''}`}>
-          { this.props.playlist_id && this.state.video_id && (<iframe
-            id='player'
-            height={this.state.iframe_height}
-            frameBorder={frame_border || '0'}
-            src={`https://www.youtube.com/embed/${this.state.video_id}?enablejsapi=1?playlist=${this.props.playlist_id}`}
-            style={{width : '100%'}}
-            allowFullScreen
-            scrolling={`${'yes' || scrolling}`}
-          />)}
+          { this.props.playlist_id && this.state.video_id && (
+            <YouTube
+              id='player'
+              height={this.state.iframe_height}
+              videoId={this.state.video_id}
+              onStateChange={this.onStateChange}
+              opts={playerOpts}
+            />
+          )}
         </div>
       </div>
     )

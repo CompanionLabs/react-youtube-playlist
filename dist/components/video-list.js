@@ -171,37 +171,33 @@ var VideoList = function (_React$Component) {
               var videoId = v.snippet.resourceId.videoId;
 
               return _react2.default.createElement(
-                _react2.default.Fragment,
-                null,
+                'div',
+                {
+                  className: 'video-container',
+                  onClick: function onClick() {
+                    handleChange(videoId);
+                  },
+                  key: 'video-container-' + v.id
+                },
                 _react2.default.createElement(
                   'div',
                   {
-                    className: 'video-container',
-                    onClick: function onClick() {
-                      handleChange(videoId);
-                    },
-                    id: 'video-container-' + v.id
+                    id: v.id,
+                    className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
                   },
+                  show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
                   _react2.default.createElement(
                     'div',
-                    {
-                      id: v.id,
-                      className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
-                    },
-                    show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
+                    { className: 'video-info' },
                     _react2.default.createElement(
-                      'div',
-                      { className: 'video-info' },
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'video-info__title' },
-                        title
-                      ),
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'video-info__description' },
-                        description
-                      )
+                      'span',
+                      { className: 'video-info__title' },
+                      title
+                    ),
+                    _react2.default.createElement(
+                      'span',
+                      { className: 'video-info__description' },
+                      description
                     )
                   )
                 ),

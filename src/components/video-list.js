@@ -107,21 +107,19 @@ class VideoList extends React.Component {
               const { title, description } = v.snippet;
               const { videoId } = v.snippet.resourceId;
               return (
-                <React.Fragment>
+                <div
+                  className='video-container'
+                  onClick={() => {handleChange(videoId)}}
+                  key={`video-container-${v.id}`}
+                >
                   <div
-                    className='video-container'
-                    onClick={() => {handleChange(videoId)}}
-                    id={`video-container-${v.id}`}
+                    id={v.id}
+                    className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
                   >
-                    <div
-                      id={v.id}
-                      className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
-                    >
-                      {show_thumbnails ? <img src={url} /> : null}
-                      <div className={'video-info'}>
-                        <span className='video-info__title'>{title}</span>
-                        <span className='video-info__description'>{description}</span>
-                      </div>
+                    {show_thumbnails ? <img src={url} /> : null}
+                    <div className={'video-info'}>
+                      <span className='video-info__title'>{title}</span>
+                      <span className='video-info__description'>{description}</span>
                     </div>
                   </div>
                   { TooltipComp && (
@@ -129,7 +127,7 @@ class VideoList extends React.Component {
                       {description}
                     </TooltipComp>
                   )}
-                </React.Fragment>
+                </div>
               );
             })}
           </div>

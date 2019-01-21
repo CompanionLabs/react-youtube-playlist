@@ -14,15 +14,19 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _videoList = require('./video-list');
+var _reactYoutube = require('react-youtube');
 
-var _videoList2 = _interopRequireDefault(_videoList);
+var _reactYoutube2 = _interopRequireDefault(_reactYoutube);
 
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 var _utils = require('../utils');
+
+var _videoList = require('./video-list');
+
+var _videoList2 = _interopRequireDefault(_videoList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56,13 +60,47 @@ var YouTubePlaylist = function (_React$Component) {
       total_results_count: 0,
       iframe_width: 640,
       iframe_height: 390,
-      small_screen: window.innerWidth < 980
+      small_screen: window.innerWidth < 980,
+      playerOpts: {
+        playerVars: {
+          autoplay: 0
+        }
+      }
     }, _this.handleResize = function (e) {
       if (is_mounted) {
         if (e.target.innerWidth > 980 && _this.state.small_screen) {
           _this.setState({ small_screen: false });
         } else if (e.target.innerWidth <= 980 && !_this.state.small_screen) {
           _this.setState({ small_screen: true });
+        }
+      }
+    }, _this.onStateChange = function (state) {
+      var endOfVideo = state.data === 0;
+
+      if (endOfVideo) {
+        var _this$state = _this.state,
+            initial_video_list = _this$state.initial_video_list,
+            video_id = _this$state.video_id;
+
+        if (initial_video_list && video_id) {
+          var nextIndex = null;
+
+          initial_video_list.forEach(function (vid, currIndex) {
+            if (vid.snippet.resourceId.videoId === video_id) {
+              nextIndex = currIndex === initial_video_list.length - 1 ? null : currIndex + 1;
+            }
+          });
+
+          if (nextIndex) {
+            _this.setState({
+              video_id: initial_video_list[nextIndex].snippet.resourceId.videoId,
+              playerOpts: {
+                playerVars: {
+                  autoplay: 1
+                }
+              }
+            });
+          }
         }
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -137,6 +175,7 @@ var YouTubePlaylist = function (_React$Component) {
           TooltipComp = _props2.TooltipComp,
           tooltipPlacement = _props2.tooltipPlacement,
           tooltipClassName = _props2.tooltipClassName;
+      var playerOpts = this.state.playerOpts;
 
 
       var video_list_style = this.state.small_screen ? { minHeight: '20px' } : { height: this.state.iframe_height + 'px' };
@@ -176,14 +215,12 @@ var YouTubePlaylist = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'iframe-container ' + (iframe_container_class || '') },
-          this.props.playlist_id && this.state.video_id && _react2.default.createElement('iframe', {
+          this.props.playlist_id && this.state.video_id && _react2.default.createElement(_reactYoutube2.default, {
             id: 'player',
             height: this.state.iframe_height,
-            frameBorder: frame_border || '0',
-            src: 'https://www.youtube.com/embed/' + this.state.video_id + '?enablejsapi=1?playlist=' + this.props.playlist_id,
-            style: { width: '100%' },
-            allowFullScreen: true,
-            scrolling: '' + ('yes' || scrolling)
+            videoId: this.state.video_id,
+            onStateChange: this.onStateChange,
+            opts: playerOpts
           })
         )
       );
