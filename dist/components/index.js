@@ -166,17 +166,12 @@ var YouTubePlaylist = function (_React$Component) {
             playlist_id: this.props.playlist_id,
             next_page_token: this.state.next_page_token,
             height: height
-          }),
-          _react2.default.createElement(
-            'div',
-            null,
-            this.state.video_id
-          )
+          })
         ),
         _react2.default.createElement(
           'div',
           { className: 'iframe-container ' + (iframe_container_class || '') },
-          this.props.playlist_id && _react2.default.createElement('iframe', {
+          this.props.playlist_id && this.state.video_id && _react2.default.createElement('iframe', {
             id: 'player',
             height: this.state.iframe_height,
             frameBorder: frame_border || '0',

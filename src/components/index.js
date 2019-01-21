@@ -115,10 +115,9 @@ class YouTubePlaylist extends React.Component {
               height={height}
             />
           )}
-          <div>{this.state.video_id}</div>
         </div>
         <div className={`iframe-container ${iframe_container_class || ''}`}>
-          { this.props.playlist_id && (<iframe
+          { this.props.playlist_id && this.state.video_id && (<iframe
             id='player'
             height={this.state.iframe_height}
             frameBorder={frame_border || '0'}

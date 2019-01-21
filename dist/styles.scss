@@ -2,10 +2,10 @@
   border-radius: 4px;
   overflow-x: hidden;
   width: 100%;
+  display: flex;
 
   .iframe-container {
-    float: left;
-    width: 100%;
+    flex: 1;
     @media screen and (max-width: 977px) {
       margin-top: 2em;
     }
@@ -99,9 +99,9 @@
     }
 
     #outer-video-list-container {
-      float: left;
-      width: 30%;
-      padding: 0 5px 0 5px;
+      flex: 1;
+      max-width: 400px;
+      padding: 0 5px;
     }
   }
 }
