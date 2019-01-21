@@ -129,12 +129,12 @@ var YouTubePlaylist = function (_React$Component) {
           width = _props2.width,
           height = _props2.height,
           frame_border = _props2.frame_border,
-          iframe_style = _props2.iframe_style,
           container_class = _props2.container_class,
           iframe_container_class = _props2.iframe_container_class,
           video_list_container_class = _props2.video_list_container_class,
           show_thumbnails = _props2.show_thumbnails,
-          scrolling = _props2.scrolling;
+          scrolling = _props2.scrolling,
+          TooltipComp = _props2.TooltipComp;
 
 
       var video_list_style = this.state.small_screen ? { minHeight: '20px' } : { height: this.state.iframe_height + 'px' };
@@ -165,7 +165,8 @@ var YouTubePlaylist = function (_React$Component) {
             api_key: this.props.api_key,
             playlist_id: this.props.playlist_id,
             next_page_token: this.state.next_page_token,
-            height: height
+            height: height,
+            TooltipComp: TooltipComp
           })
         ),
         _react2.default.createElement(
@@ -188,6 +189,10 @@ var YouTubePlaylist = function (_React$Component) {
   return YouTubePlaylist;
 }(_react2.default.Component);
 
+YouTubePlaylist.defaultProps = {
+  TooltipComp: null
+};
+
 YouTubePlaylist.propTypes = {
   api_key: _propTypes2.default.string.isRequired,
   playlist_id: _propTypes2.default.string,
@@ -198,7 +203,8 @@ YouTubePlaylist.propTypes = {
   show_thumbnails: _propTypes2.default.bool,
   iframe_container_class: _propTypes2.default.string,
   video_list_container_class: _propTypes2.default.string,
-  scrolling: _propTypes2.default.oneOf(['yes', 'no', 'auto'])
+  scrolling: _propTypes2.default.oneOf(['yes', 'no', 'auto']),
+  TooltipComp: _propTypes2.default.any
 };
 
 exports.default = YouTubePlaylist;

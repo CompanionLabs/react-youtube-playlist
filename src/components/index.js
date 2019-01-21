@@ -79,12 +79,12 @@ class YouTubePlaylist extends React.Component {
       width,
       height,
       frame_border,
-      iframe_style,
       container_class,
       iframe_container_class,
       video_list_container_class,
       show_thumbnails,
       scrolling,
+      TooltipComp,
     } = this.props;
 
     const video_list_style = this.state.small_screen ? {minHeight : '20px'} : {height : `${this.state.iframe_height}px`};
@@ -113,6 +113,7 @@ class YouTubePlaylist extends React.Component {
               playlist_id={this.props.playlist_id}
               next_page_token={this.state.next_page_token}
               height={height}
+              TooltipComp={TooltipComp}
             />
           )}
         </div>
@@ -132,6 +133,10 @@ class YouTubePlaylist extends React.Component {
   }
 }
 
+YouTubePlaylist.defaultProps = {
+  TooltipComp: null,
+}
+
 YouTubePlaylist.propTypes = {
   api_key: PropTypes.string.isRequired,
   playlist_id: PropTypes.string,
@@ -149,6 +154,7 @@ YouTubePlaylist.propTypes = {
   iframe_container_class: PropTypes.string,
   video_list_container_class: PropTypes.string,
   scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
+  TooltipComp: PropTypes.any,
 }
 
 export default YouTubePlaylist;

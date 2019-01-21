@@ -140,7 +140,8 @@ var VideoList = function (_React$Component) {
       var _props2 = this.props,
           handleChange = _props2.handleChange,
           show_thumbnails = _props2.show_thumbnails,
-          current_video_id = _props2.current_video_id;
+          current_video_id = _props2.current_video_id,
+          TooltipComp = _props2.TooltipComp;
 
 
       return _react2.default.createElement(
@@ -214,6 +215,11 @@ var VideoList = function (_React$Component) {
                         { className: 'video-info__description' },
                         description
                       )
+                    ),
+                    TooltipComp && _react2.default.createElement(
+                      TooltipComp,
+                      { placement: 'right', target: v.id },
+                      description
                     )
                   )
                 )

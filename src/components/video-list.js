@@ -80,7 +80,7 @@ class VideoList extends React.Component {
   }
 
   render() {
-    const {handleChange, show_thumbnails, current_video_id} = this.props;
+    const {handleChange, show_thumbnails, current_video_id, TooltipComp} = this.props;
 
     return (
       <div>
@@ -125,6 +125,11 @@ class VideoList extends React.Component {
                         <span className='video-info__title'>{title}</span>
                         <span className='video-info__description'>{description}</span>
                       </div>
+                      { TooltipComp && (
+                        <TooltipComp placement="right" target={v.id}>
+                          {description}
+                        </TooltipComp>
+                      )}
                     </div>
                   </div>
                 </OverlayTrigger>
