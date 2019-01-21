@@ -134,7 +134,8 @@ var YouTubePlaylist = function (_React$Component) {
           video_list_container_class = _props2.video_list_container_class,
           show_thumbnails = _props2.show_thumbnails,
           scrolling = _props2.scrolling,
-          TooltipComp = _props2.TooltipComp;
+          TooltipComp = _props2.TooltipComp,
+          tooltipPlacement = _props2.tooltipPlacement;
 
 
       var video_list_style = this.state.small_screen ? { minHeight: '20px' } : { height: this.state.iframe_height + 'px' };
@@ -192,7 +193,7 @@ var YouTubePlaylist = function (_React$Component) {
 
 YouTubePlaylist.defaultProps = {
   TooltipComp: null,
-  tooltipPlacement: 'Right'
+  tooltipPlacement: 'right'
 };
 
 YouTubePlaylist.propTypes = {
