@@ -16,8 +16,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _utils = require('../utils');
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _searchBar = require('./search-bar');
 
 var _searchBar2 = _interopRequireDefault(_searchBar);
@@ -135,8 +133,6 @@ var VideoList = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       var _props2 = this.props,
           handleChange = _props2.handleChange,
           show_thumbnails = _props2.show_thumbnails,
@@ -173,54 +169,39 @@ var VideoList = function (_React$Component) {
               var videoId = v.snippet.resourceId.videoId;
 
               return _react2.default.createElement(
-                _reactBootstrap.OverlayTrigger,
+                'div',
                 {
-                  id: v.id + '-overlay-id',
-                  trigger: ['hover', 'focus'],
-                  placement: (0, _jquery2.default)('body').width() >= 768 ? 'left' : 'top',
-                  key: v.id,
-                  overlay: _this3.state.truncated_list.find(function (e) {
-                    return e == v.id;
-                  }) ? _react2.default.createElement(
-                    _reactBootstrap.Popover,
-                    { id: v.id + '-popover-id' },
-                    title
-                  ) : _react2.default.createElement(_reactBootstrap.Popover, { id: v.id + '-popover-id', bsClass: 'hidden' })
+                  className: 'video-container',
+                  onClick: function onClick() {
+                    handleChange(videoId);
+                  },
+                  id: 'video-container-' + v.id
                 },
                 _react2.default.createElement(
                   'div',
                   {
-                    className: 'video-container',
-                    onClick: function onClick() {
-                      handleChange(videoId);
-                    }
+                    id: v.id,
+                    className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
                   },
+                  show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
                   _react2.default.createElement(
                     'div',
-                    {
-                      id: v.id,
-                      className: 'title-container ' + (current_video_id == videoId ? ' current' : '')
-                    },
-                    show_thumbnails ? _react2.default.createElement('img', { src: url }) : null,
+                    { className: 'video-info' },
                     _react2.default.createElement(
-                      'div',
-                      { className: 'video-info' },
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'video-info__title' },
-                        title
-                      ),
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'video-info__description' },
-                        description
-                      )
+                      'span',
+                      { className: 'video-info__title' },
+                      title
                     ),
-                    TooltipComp && _react2.default.createElement(
-                      TooltipComp,
-                      { placement: 'right', target: v.id },
+                    _react2.default.createElement(
+                      'span',
+                      { className: 'video-info__description' },
                       description
                     )
+                  ),
+                  TooltipComp && _react2.default.createElement(
+                    TooltipComp,
+                    { placement: 'top', target: 'video-container-' + v.id },
+                    description
                   )
                 )
               );

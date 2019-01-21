@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 import {youTubeFetch} from 'utils';
-import {Popover, OverlayTrigger} from 'react-bootstrap';
 import SearchBar from './search-bar';
 
 let is_mounted = false;
@@ -101,39 +100,28 @@ class VideoList extends React.Component {
               const { title, description } = v.snippet;
               const { videoId } = v.snippet.resourceId;
               return (
-                <OverlayTrigger
-                  id={`${v.id}-overlay-id`}
-                  trigger={['hover','focus']}
-                  placement={$('body').width() >= 768 ? 'left' : 'top'}
-                  key={v.id}
-                  overlay={
-                    this.state.truncated_list.find(e => e == v.id) ?
-                    <Popover id={`${v.id}-popover-id`}>{title}</Popover> :
-                    <Popover id={`${v.id}-popover-id`} bsClass='hidden' />
-                  }
-                  >
+                <div
+                  className='video-container'
+                  onClick={() => {handleChange(videoId)}}
+                  id={`video-container-${v.id}`}
+                >
                   <div
-                    className='video-container'
-                    onClick={() => {handleChange(videoId)}}
-                    >
-                    <div
-                      id={v.id}
-                      className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
-                      >
-                      {show_thumbnails ? <img src={url} /> : null}
-                      <div className={'video-info'}>
-                        <span className='video-info__title'>{title}</span>
-                        <span className='video-info__description'>{description}</span>
-                      </div>
-                      { TooltipComp && (
-                        <TooltipComp placement="right" target={v.id}>
-                          {description}
-                        </TooltipComp>
-                      )}
+                    id={v.id}
+                    className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
+                  >
+                    {show_thumbnails ? <img src={url} /> : null}
+                    <div className={'video-info'}>
+                      <span className='video-info__title'>{title}</span>
+                      <span className='video-info__description'>{description}</span>
                     </div>
+                    { TooltipComp && (
+                      <TooltipComp placement="top" target={`video-container-${v.id}`}>
+                        {description}
+                      </TooltipComp>
+                    )}
                   </div>
-                </OverlayTrigger>
-              )
+                </div>
+              );
             })}
           </div>
         </div>
