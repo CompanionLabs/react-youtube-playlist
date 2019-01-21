@@ -114,6 +114,7 @@ class YouTubePlaylist extends React.Component {
               next_page_token={this.state.next_page_token}
               height={height}
               TooltipComp={TooltipComp}
+              tooltipPlacement={tooltipPlacement}
             />
           )}
         </div>
@@ -135,6 +136,7 @@ class YouTubePlaylist extends React.Component {
 
 YouTubePlaylist.defaultProps = {
   TooltipComp: null,
+  tooltipPlacement: 'Top',
 }
 
 YouTubePlaylist.propTypes = {
@@ -155,6 +157,7 @@ YouTubePlaylist.propTypes = {
   video_list_container_class: PropTypes.string,
   scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
   TooltipComp: PropTypes.any,
+  tooltipPlacement: PropTypes.string,
 }
 
 export default YouTubePlaylist;

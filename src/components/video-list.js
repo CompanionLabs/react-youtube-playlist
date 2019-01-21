@@ -79,7 +79,7 @@ class VideoList extends React.Component {
   }
 
   render() {
-    const {handleChange, show_thumbnails, current_video_id, TooltipComp} = this.props;
+    const {handleChange, show_thumbnails, current_video_id, TooltipComp, tooltipPlacement} = this.props;
 
     return (
       <div>
@@ -100,27 +100,29 @@ class VideoList extends React.Component {
               const { title, description } = v.snippet;
               const { videoId } = v.snippet.resourceId;
               return (
-                <div
-                  className='video-container'
-                  onClick={() => {handleChange(videoId)}}
-                  id={`video-container-${v.id}`}
-                >
+                <React.Fragment>
                   <div
-                    id={v.id}
-                    className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
+                    className='video-container'
+                    onClick={() => {handleChange(videoId)}}
+                    id={`video-container-${v.id}`}
                   >
-                    {show_thumbnails ? <img src={url} /> : null}
-                    <div className={'video-info'}>
-                      <span className='video-info__title'>{title}</span>
-                      <span className='video-info__description'>{description}</span>
+                    <div
+                      id={v.id}
+                      className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
+                    >
+                      {show_thumbnails ? <img src={url} /> : null}
+                      <div className={'video-info'}>
+                        <span className='video-info__title'>{title}</span>
+                        <span className='video-info__description'>{description}</span>
+                      </div>
                     </div>
-                    { TooltipComp && (
-                      <TooltipComp placement="top" target={`video-container-${v.id}`}>
-                        {description}
-                      </TooltipComp>
-                    )}
                   </div>
-                </div>
+                  { TooltipComp && (
+                    <TooltipComp placement={tooltipPlacement} target={`video-container-${v.id}`}>
+                      {description}
+                    </TooltipComp>
+                  )}
+                </React.Fragment>
               );
             })}
           </div>
