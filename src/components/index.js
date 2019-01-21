@@ -10,43 +10,18 @@ import {
  let is_mounted = false;
 
 class YouTubePlaylist extends React.Component {
-  static propTypes = {
-    api_key: PropTypes.string.isRequired,
-    playlist_id: PropTypes.string,
-    width: PropTypes.oneOfType([
-      PropTypes.string, PropTypes.number
-    ]),
-    height: PropTypes.oneOfType([
-      PropTypes.string, PropTypes.number
-    ]),
-    frame_border: PropTypes.oneOfType([
-      PropTypes.string, PropTypes.number
-    ]),
-    iframe_style: PropTypes.object,
-    show_thumbnails: PropTypes.bool,
-    iframe_container_class: PropTypes.string,
-    video_list_container_class: PropTypes.string,
-    scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
+  state = {
+    fetching : true,
+    initial_video_list : [],
+    video_id : '',
+    next_page_token : '',
+    total_results_count : 0,
+    iframe_width : 640,
+    iframe_height : 390,
+    small_screen : window.innerWidth < 980
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      fetching : true,
-      initial_video_list : [],
-      video_id : '',
-      next_page_token : '',
-      total_results_count : 0,
-      iframe_width : 640,
-      iframe_height : 390,
-      small_screen : window.innerWidth < 980
-    }
-
-    this.handleResize = this.handleResize.bind(this);
-  }
-
-  handleResize(e) {
+  handleResize = (e) => {
     if(is_mounted) {
       if(e.target.innerWidth > 980 && this.state.small_screen) {
         this.setState({small_screen : false});
@@ -69,7 +44,7 @@ class YouTubePlaylist extends React.Component {
     else {
       youTubeFetch(playlist_id, api_key)
       .then(video_data => {
-        if(is_mounted) {
+        if (is_mounted) {
           let video_id, channel_id = '';
           const {items, nextPageToken, pageInfo} = video_data;
           if(items.length > 0) {
@@ -130,7 +105,7 @@ class YouTubePlaylist extends React.Component {
             <VideoList
               initial_video_list={this.state.initial_video_list}
               current_video_id={this.state.video_id}
-              handleChange={v => {is_mounted ? this.setState({video_id : v}) : null}}
+              handleChange={v => {this.setState({video_id : v})}}
               show_thumbnails={show_thumbnails}
               small_screen={this.state.small_screen}
               total_results_count={this.state.total_results_count}
@@ -140,9 +115,10 @@ class YouTubePlaylist extends React.Component {
               height={height}
             />
           )}
+          <div>{this.state.video_id}</div>
         </div>
         <div className={`iframe-container ${iframe_container_class || ''}`}>
-          <iframe
+          { this.props.playlist_id && (<iframe
             id='player'
             height={this.state.iframe_height}
             frameBorder={frame_border || '0'}
@@ -150,11 +126,30 @@ class YouTubePlaylist extends React.Component {
             style={{width : '100%'}}
             allowFullScreen
             scrolling={`${'yes' || scrolling}`}
-          />
+          />)}
         </div>
       </div>
     )
   }
+}
+
+YouTubePlaylist.propTypes = {
+  api_key: PropTypes.string.isRequired,
+  playlist_id: PropTypes.string,
+  width: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number
+  ]),
+  height: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number
+  ]),
+  frame_border: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number
+  ]),
+  iframe_style: PropTypes.object,
+  show_thumbnails: PropTypes.bool,
+  iframe_container_class: PropTypes.string,
+  video_list_container_class: PropTypes.string,
+  scrolling : PropTypes.oneOf(['yes', 'no', 'auto']),
 }
 
 export default YouTubePlaylist;

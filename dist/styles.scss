@@ -1,18 +1,22 @@
-
 #react-youtube-channel-container {
+  border-radius: 4px;
   overflow-x: hidden;
-  width : 100%;
+  width: 100%;
 
   .iframe-container {
-    float : left;
-    width : 100%;
+    float: left;
+    width: 100%;
+    @media screen and (max-width: 977px) {
+      margin-top: 2em;
+    }
   }
 
   #outer-video-list-container {
-    display : block;
-    width : 100%;
-    background-color: #494949;
-    padding : 0 5px 0 5px;
+    display: block;
+    width: 100%;
+    padding: 0 5px;
+    background-color: #fff;
+    margin-top: 0 !important;
 
     .inner-video-list-container {
       overflow-y: auto;
@@ -21,7 +25,7 @@
 
   @media (max-width: 980px) {
     #outer-video-list-container {
-      margin-top : -5px;
+      margin-top: -5px;
 
       .inner-video-list-container {
         overflow-y: auto;
@@ -31,10 +35,10 @@
   }
 
   .video-container {
-    width : 100%;
+    width: 100%;
 
     img {
-      width: 50px;
+      width: 100px;
       height: auto;
       padding-right: 7px;
     }
@@ -46,35 +50,64 @@
 
   .title-container,
   .title-container.current {
-    width : 100%;
-    padding : 5px;
-    background-color: black;
-    color : #d3d3d3;
-    font-family: Verdana, Geneva, sans-serif;
-    margin-bottom : 10px;
+    width: 100%;
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: 0.5em;
+    }
   }
 
   .title-container.current {
-    background-color: #272727;
+      background-color: #FFFFB7;
+      color: #000;
+      margin-bottom: 0;
+  }
+
+  .video-info {
+    display: flex;
+    flex-direction: column;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &__title {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    &__description {
+      font-size: 0.8em;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   .react-youtube-channel-search-bar-container {
-    margin: 5px 0 15px 0;
+    margin: 0 0 15px 0;
   }
 
   @media (min-width: 981px) {
     white-space: nowrap;
 
     .iframe-container {
-      display : inline-block;
-      width : 70%;
+      display: inline-block;
+      width: 70%;
     }
 
     #outer-video-list-container {
       float: left;
-      width : 30%;
-      background-color: #494949;
-      padding : 0 5px 0 5px;
+      width: 30%;
+      padding: 0 5px 0 5px;
     }
+  }
+}
+
+.inner-video-list-scroll-area-container {
+  .video-container + .video-container {
+    border-top: 1px solid #DEDEDE;
   }
 }

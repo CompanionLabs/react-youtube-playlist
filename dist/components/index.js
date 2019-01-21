@@ -37,12 +37,18 @@ var is_mounted = false;
 var YouTubePlaylist = function (_React$Component) {
   _inherits(YouTubePlaylist, _React$Component);
 
-  function YouTubePlaylist(props) {
+  function YouTubePlaylist() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, YouTubePlaylist);
 
-    var _this = _possibleConstructorReturn(this, (YouTubePlaylist.__proto__ || Object.getPrototypeOf(YouTubePlaylist)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = YouTubePlaylist.__proto__ || Object.getPrototypeOf(YouTubePlaylist)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       fetching: true,
       initial_video_list: [],
       video_id: '',
@@ -51,24 +57,18 @@ var YouTubePlaylist = function (_React$Component) {
       iframe_width: 640,
       iframe_height: 390,
       small_screen: window.innerWidth < 980
-    };
-
-    _this.handleResize = _this.handleResize.bind(_this);
-    return _this;
+    }, _this.handleResize = function (e) {
+      if (is_mounted) {
+        if (e.target.innerWidth > 980 && _this.state.small_screen) {
+          _this.setState({ small_screen: false });
+        } else if (e.target.innerWidth <= 980 && !_this.state.small_screen) {
+          _this.setState({ small_screen: true });
+        }
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(YouTubePlaylist, [{
-    key: 'handleResize',
-    value: function handleResize(e) {
-      if (is_mounted) {
-        if (e.target.innerWidth > 980 && this.state.small_screen) {
-          this.setState({ small_screen: false });
-        } else if (e.target.innerWidth <= 980 && !this.state.small_screen) {
-          this.setState({ small_screen: true });
-        }
-      }
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -157,7 +157,7 @@ var YouTubePlaylist = function (_React$Component) {
             initial_video_list: this.state.initial_video_list,
             current_video_id: this.state.video_id,
             handleChange: function handleChange(v) {
-              is_mounted ? _this3.setState({ video_id: v }) : null;
+              _this3.setState({ video_id: v });
             },
             show_thumbnails: show_thumbnails,
             small_screen: this.state.small_screen,
@@ -166,12 +166,17 @@ var YouTubePlaylist = function (_React$Component) {
             playlist_id: this.props.playlist_id,
             next_page_token: this.state.next_page_token,
             height: height
-          })
+          }),
+          _react2.default.createElement(
+            'div',
+            null,
+            this.state.video_id
+          )
         ),
         _react2.default.createElement(
           'div',
           { className: 'iframe-container ' + (iframe_container_class || '') },
-          _react2.default.createElement('iframe', {
+          this.props.playlist_id && _react2.default.createElement('iframe', {
             id: 'player',
             height: this.state.iframe_height,
             frameBorder: frame_border || '0',
@@ -200,4 +205,5 @@ YouTubePlaylist.propTypes = {
   video_list_container_class: _propTypes2.default.string,
   scrolling: _propTypes2.default.oneOf(['yes', 'no', 'auto'])
 };
+
 exports.default = YouTubePlaylist;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.youTubeFetchFiltered = exports.equalVideoList = exports.dotdotdot = exports.getHeight = exports.getWidth = exports.youTubeFetch = undefined;
+exports.youTubeFetchFiltered = exports.equalVideoList = exports.getHeight = exports.getWidth = exports.youTubeFetch = undefined;
 
 var _youtubeFetch = require('./youtube-fetch');
 
@@ -16,10 +16,6 @@ var _getWidth2 = _interopRequireDefault(_getWidth);
 var _getHeight = require('./get-height');
 
 var _getHeight2 = _interopRequireDefault(_getHeight);
-
-var _dotdotdot = require('./dotdotdot');
-
-var _dotdotdot2 = _interopRequireDefault(_dotdotdot);
 
 var _equalVideoList = require('./equal-video-list');
 
@@ -34,6 +30,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.youTubeFetch = _youtubeFetch2.default;
 exports.getWidth = _getWidth2.default;
 exports.getHeight = _getHeight2.default;
-exports.dotdotdot = _dotdotdot2.default;
 exports.equalVideoList = _equalVideoList2.default;
 exports.youTubeFetchFiltered = _youtubeFetchFiltered2.default;

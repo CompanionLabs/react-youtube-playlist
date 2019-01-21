@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-const dotdotdot = require('utils/dotdotdot')($);
-import {equalVideoList, youTubeFetch} from 'utils';
+import {youTubeFetch} from 'utils';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import SearchBar from './search-bar';
 
@@ -21,33 +20,14 @@ class VideoList extends React.Component {
       inner_video_list_container_height : this.props.height ? (this.props.small_screen ? 160 : this.props.height - 60) : 160
     }
 
-    this.initDotdotdot = this.initDotdotdot.bind(this);
     this.handleUpdateFilteredVideos = this.handleUpdateFilteredVideos.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  initDotdotdot() {
-    this.state.filtered_video_list.forEach(v => {
-      $(`#${v.id}`).dotdotdot({
-        ellipsis : '...',
-        wrap : 'letter',
-        height : 35,
-        watch : true,
-        tolerance : 0,
-        callback : (is_trucated) => {
-          const list = this.state.truncated_list;
-          if(is_mounted) {
-            this.setState({truncated_list : is_trucated ? [...list, v.id] : list.filter(e => e != v.id)});
-          }
-        }
-      });
-    });
   }
 
   handleUpdateFilteredVideos(videos, filter_applied) {
     this.state.master_video_list.forEach(v => {$(`#${v.id}`).trigger('destroy')});
     if(is_mounted) {
-      this.setState({filtered_video_list : videos, filter_applied}, this.initDotdotdot);
+      this.setState({filtered_video_list : videos, filter_applied});
     }
   }
 
@@ -69,7 +49,7 @@ class VideoList extends React.Component {
               master_video_list : [...master_video_list, ...result.items],
               filtered_video_list : [...master_video_list, ...result.items],
               fetching_page : false
-            }, this.initDotdotdot);
+            });
           }
         })
         .catch(e => {console.log('ERROR IN SCROLL HANDLER : ', e)})
@@ -79,7 +59,6 @@ class VideoList extends React.Component {
 
   componentDidMount() {
     is_mounted = true;
-    this.initDotdotdot();
     $('.inner-video-list-container').on('scroll', this.handleScroll);
   }
 
@@ -88,7 +67,6 @@ class VideoList extends React.Component {
       this.state.master_video_list.forEach(v => {$(`#${v.id}`).trigger('destroy')});
 
       if(is_mounted) {
-        this.initDotdotdot();
         this.setState({
           inner_video_list_container_height : this.props.small_screen ? 160 : this.props.height - 60
         });
@@ -119,10 +97,9 @@ class VideoList extends React.Component {
             style={{height : this.state.inner_video_list_container_height}}
             >
             {this.state.filtered_video_list.map(v => {
-              const {url} = v.snippet.thumbnails ? v.snippet.thumbnails.medium : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg';
-              const {title} = v.snippet;
-              const {videoId} = v.snippet.resourceId;
-
+              const { url } = v.snippet.thumbnails ? v.snippet.thumbnails.medium : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg';
+              const { title, description } = v.snippet;
+              const { videoId } = v.snippet.resourceId;
               return (
                 <OverlayTrigger
                   id={`${v.id}-overlay-id`}
@@ -143,7 +120,11 @@ class VideoList extends React.Component {
                       id={v.id}
                       className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
                       >
-                      {show_thumbnails ? <img src={url} /> : null}{title}
+                      {show_thumbnails ? <img src={url} /> : null}
+                      <div className={'video-info'}>
+                        <span className='video-info__title'>{title}</span>
+                        <span className='video-info__description'>{description}</span>
+                      </div>
                     </div>
                   </div>
                 </OverlayTrigger>
