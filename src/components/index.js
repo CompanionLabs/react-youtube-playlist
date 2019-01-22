@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
-import $ from 'jquery';
 import {
   youTubeFetch,
-  getHeight
 } from '../utils';
 import VideoList from './video-list';
 
@@ -17,23 +15,11 @@ class YouTubePlaylist extends React.Component {
     video_id : '',
     next_page_token : '',
     total_results_count : 0,
-    small_screen : window.innerWidth < 980,
     playerOpts: {
       width : '100%',
       height : '100%',
       playerVars: {
         autoplay: 0
-      }
-    }
-  }
-
-  handleResize = (e) => {
-    if(is_mounted) {
-      if(e.target.innerWidth > 980 && this.state.small_screen) {
-        this.setState({small_screen : false});
-      }
-      else if(e.target.innerWidth <= 980 && !this.state.small_screen) {
-        this.setState({small_screen : true});
       }
     }
   }
@@ -99,25 +85,10 @@ class YouTubePlaylist extends React.Component {
         console.error('componentDidMount:err', e);
       });
     }
-
-    // const currentOpts = this.state.playerOpts;
-    // const updatedOpts = {
-    //   ...currentOpts,
-    //   ...{
-    //     height: height ? getHeight(height) : this.state.playerOpts.height,
-    //   }
-    // }
-
-    // this.setState({
-    //   playerOpts: updatedOpts,
-    // });
-
-    $(window).on('resize', this.handleResize);
   }
 
   componentWillUnmount() {
     is_mounted = false;
-    $(window).off('resize', this.handleResize)
   }
 
   render() {
@@ -200,7 +171,6 @@ YouTubePlaylist.propTypes = {
   frame_border: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number
   ]),
-  iframe_style: PropTypes.object,
   show_thumbnails: PropTypes.bool,
   iframe_container_class: PropTypes.string,
   video_list_container_class: PropTypes.string,

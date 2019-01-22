@@ -111,7 +111,7 @@ class VideoList extends React.Component {
                   <div
                     className='video-container'
                     onClick={() => {handleChange(videoId)}}
-                    key={`video-container-${v.id}`}
+                    id={`video-container-${v.id}`}
                   >
                     <div
                       id={v.id}
