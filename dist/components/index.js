@@ -61,13 +61,27 @@ var YouTubePlaylist = function (_React$Component) {
           autoplay: 0
         }
       }
+    }, _this.onPlay = function () {
+      var onPlay = _this.props.onPlay;
+
+
+      if (onPlay) {
+        var _this$state = _this.state,
+            initial_video_list = _this$state.initial_video_list,
+            video_id = _this$state.video_id;
+
+        var currVideo = initial_video_list.find(function (vid) {
+          return vid.snippet.resourceId.videoId === video_id;
+        });
+        onPlay(currVideo);
+      }
     }, _this.onStateChange = function (state) {
       var endOfVideo = state.data === 0;
 
       if (endOfVideo) {
-        var _this$state = _this.state,
-            initial_video_list = _this$state.initial_video_list,
-            video_id = _this$state.video_id;
+        var _this$state2 = _this.state,
+            initial_video_list = _this$state2.initial_video_list,
+            video_id = _this$state2.video_id;
 
         if (initial_video_list && video_id) {
           var nextIndex = null;
@@ -197,7 +211,8 @@ var YouTubePlaylist = function (_React$Component) {
             containerClassName: 'youtube-player-container',
             videoId: this.state.video_id,
             onStateChange: this.onStateChange,
-            opts: playerOpts
+            opts: playerOpts,
+            onPlay: this.onPlay
           })
         )
       );

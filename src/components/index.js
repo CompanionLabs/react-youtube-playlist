@@ -24,6 +24,16 @@ class YouTubePlaylist extends React.Component {
     }
   }
 
+  onPlay = () => {
+    const { onPlay } = this.props;
+
+    if (onPlay) {
+      const { initial_video_list, video_id } = this.state;
+      const currVideo = initial_video_list.find(vid => vid.snippet.resourceId.videoId === video_id);
+      onPlay(currVideo);
+    }
+  }
+
   onStateChange = (state) => {
     const endOfVideo = state.data === 0;
 
@@ -145,6 +155,7 @@ class YouTubePlaylist extends React.Component {
               videoId={this.state.video_id}
               onStateChange={this.onStateChange}
               opts={playerOpts}
+              onPlay={this.onPlay}
             />
           )}
         </div>
