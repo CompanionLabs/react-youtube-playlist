@@ -107,19 +107,21 @@ class VideoList extends React.Component {
               const { title, description } = v.snippet;
               const { videoId } = v.snippet.resourceId;
               return (
-                <div
-                  className='video-container'
-                  onClick={() => {handleChange(videoId)}}
-                  key={`video-container-${v.id}`}
-                >
+                <div key={v.id}>
                   <div
-                    id={v.id}
-                    className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
+                    className='video-container'
+                    onClick={() => {handleChange(videoId)}}
+                    key={`video-container-${v.id}`}
                   >
-                    {show_thumbnails ? <img src={url} /> : null}
-                    <div className={'video-info'}>
-                      <span className='video-info__title'>{title}</span>
-                      <span className='video-info__description'>{description}</span>
+                    <div
+                      id={v.id}
+                      className={`title-container ${current_video_id == videoId ? ' current' : ''}`}
+                    >
+                      {show_thumbnails ? <img src={url} /> : null}
+                      <div className={'video-info'}>
+                        <span className='video-info__title'>{title}</span>
+                        <span className='video-info__description'>{description}</span>
+                      </div>
                     </div>
                   </div>
                   { TooltipComp && (

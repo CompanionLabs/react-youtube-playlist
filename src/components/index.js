@@ -21,6 +21,7 @@ class YouTubePlaylist extends React.Component {
     iframe_height : 390,
     small_screen : window.innerWidth < 980,
     playerOpts: {
+      width: '100%',
       playerVars: {
         autoplay: 0
       }
