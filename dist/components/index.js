@@ -18,10 +18,6 @@ var _reactYoutube = require('react-youtube');
 
 var _reactYoutube2 = _interopRequireDefault(_reactYoutube);
 
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
 var _utils = require('../utils');
 
 var _videoList = require('./video-list');
@@ -58,20 +54,11 @@ var YouTubePlaylist = function (_React$Component) {
       video_id: '',
       next_page_token: '',
       total_results_count: 0,
-      small_screen: window.innerWidth < 980,
       playerOpts: {
         width: '100%',
         height: '100%',
         playerVars: {
           autoplay: 0
-        }
-      }
-    }, _this.handleResize = function (e) {
-      if (is_mounted) {
-        if (e.target.innerWidth > 980 && _this.state.small_screen) {
-          _this.setState({ small_screen: false });
-        } else if (e.target.innerWidth <= 980 && !_this.state.small_screen) {
-          _this.setState({ small_screen: true });
         }
       }
     }, _this.onStateChange = function (state) {
@@ -147,26 +134,11 @@ var YouTubePlaylist = function (_React$Component) {
           console.error('componentDidMount:err', e);
         });
       }
-
-      // const currentOpts = this.state.playerOpts;
-      // const updatedOpts = {
-      //   ...currentOpts,
-      //   ...{
-      //     height: height ? getHeight(height) : this.state.playerOpts.height,
-      //   }
-      // }
-
-      // this.setState({
-      //   playerOpts: updatedOpts,
-      // });
-
-      (0, _jquery2.default)(window).on('resize', this.handleResize);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       is_mounted = false;
-      (0, _jquery2.default)(window).off('resize', this.handleResize);
     }
   }, {
     key: 'render',
@@ -247,7 +219,6 @@ YouTubePlaylist.propTypes = {
   width: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
   height: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
   frame_border: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-  iframe_style: _propTypes2.default.object,
   show_thumbnails: _propTypes2.default.bool,
   iframe_container_class: _propTypes2.default.string,
   video_list_container_class: _propTypes2.default.string,
