@@ -58,11 +58,10 @@ var YouTubePlaylist = function (_React$Component) {
       video_id: '',
       next_page_token: '',
       total_results_count: 0,
-      iframe_width: 640,
-      iframe_height: 390,
       small_screen: window.innerWidth < 980,
       playerOpts: {
         width: '100%',
+        height: '100%',
         playerVars: {
           autoplay: 0
         }
@@ -149,7 +148,17 @@ var YouTubePlaylist = function (_React$Component) {
         });
       }
 
-      this.setState({ iframe_height: height ? (0, _utils.getHeight)(height) : this.state.height });
+      // const currentOpts = this.state.playerOpts;
+      // const updatedOpts = {
+      //   ...currentOpts,
+      //   ...{
+      //     height: height ? getHeight(height) : this.state.playerOpts.height,
+      //   }
+      // }
+
+      // this.setState({
+      //   playerOpts: updatedOpts,
+      // });
 
       (0, _jquery2.default)(window).on('resize', this.handleResize);
     }
@@ -167,19 +176,15 @@ var YouTubePlaylist = function (_React$Component) {
       var _props2 = this.props,
           width = _props2.width,
           height = _props2.height,
-          frame_border = _props2.frame_border,
           container_class = _props2.container_class,
           iframe_container_class = _props2.iframe_container_class,
           video_list_container_class = _props2.video_list_container_class,
           show_thumbnails = _props2.show_thumbnails,
-          scrolling = _props2.scrolling,
           TooltipComp = _props2.TooltipComp,
           tooltipPlacement = _props2.tooltipPlacement,
           tooltipClassName = _props2.tooltipClassName;
       var playerOpts = this.state.playerOpts;
 
-
-      var video_list_style = this.state.small_screen ? { minHeight: '20px' } : { height: this.state.iframe_height + 'px' };
 
       return _react2.default.createElement(
         'div',
@@ -192,8 +197,7 @@ var YouTubePlaylist = function (_React$Component) {
           'div',
           {
             id: 'outer-video-list-container',
-            className: '' + (video_list_container_class || ''),
-            style: video_list_style
+            className: '' + (video_list_container_class || '')
           },
           !this.state.fetching && this.state.video_id && _react2.default.createElement(_videoList2.default, {
             initial_video_list: this.state.initial_video_list,
@@ -218,7 +222,7 @@ var YouTubePlaylist = function (_React$Component) {
           { className: 'iframe-container ' + (iframe_container_class || '') },
           this.props.playlist_id && this.state.video_id && _react2.default.createElement(_reactYoutube2.default, {
             id: 'player',
-            height: this.state.iframe_height,
+            containerClassName: 'youtube-player-container',
             videoId: this.state.video_id,
             onStateChange: this.onStateChange,
             opts: playerOpts

@@ -5,7 +5,7 @@ import $ from 'jquery';
 import {
   youTubeFetch,
   getHeight
-} from 'utils';
+} from '../utils';
 import VideoList from './video-list';
 
  let is_mounted = false;
@@ -17,11 +17,10 @@ class YouTubePlaylist extends React.Component {
     video_id : '',
     next_page_token : '',
     total_results_count : 0,
-    iframe_width : 640,
-    iframe_height : 390,
     small_screen : window.innerWidth < 980,
     playerOpts: {
-      width: '100%',
+      width : '100%',
+      height : '100%',
       playerVars: {
         autoplay: 0
       }
@@ -101,7 +100,17 @@ class YouTubePlaylist extends React.Component {
       });
     }
 
-    this.setState({iframe_height : height ? getHeight(height) : this.state.height});
+    // const currentOpts = this.state.playerOpts;
+    // const updatedOpts = {
+    //   ...currentOpts,
+    //   ...{
+    //     height: height ? getHeight(height) : this.state.playerOpts.height,
+    //   }
+    // }
+
+    // this.setState({
+    //   playerOpts: updatedOpts,
+    // });
 
     $(window).on('resize', this.handleResize);
   }
@@ -115,12 +124,10 @@ class YouTubePlaylist extends React.Component {
     const {
       width,
       height,
-      frame_border,
       container_class,
       iframe_container_class,
       video_list_container_class,
       show_thumbnails,
-      scrolling,
       TooltipComp,
       tooltipPlacement,
       tooltipClassName,
@@ -129,8 +136,6 @@ class YouTubePlaylist extends React.Component {
     const {
       playerOpts,
     } = this.state;
-
-    const video_list_style = this.state.small_screen ? {minHeight : '20px'} : {height : `${this.state.iframe_height}px`};
 
     return (
       <div
@@ -141,7 +146,6 @@ class YouTubePlaylist extends React.Component {
         <div
           id='outer-video-list-container'
           className={`${video_list_container_class || ''}`}
-          style={video_list_style}
           >
           {!this.state.fetching &&
           this.state.video_id && (
@@ -166,7 +170,7 @@ class YouTubePlaylist extends React.Component {
           { this.props.playlist_id && this.state.video_id && (
             <YouTube
               id='player'
-              height={this.state.iframe_height}
+              containerClassName='youtube-player-container'
               videoId={this.state.video_id}
               onStateChange={this.onStateChange}
               opts={playerOpts}
