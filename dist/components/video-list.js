@@ -143,7 +143,7 @@ var VideoList = function (_React$Component) {
 
 
       return _react2.default.createElement(
-        'div',
+        _react2.default.Fragment,
         null,
         _react2.default.createElement(_searchBar2.default, {
           master_video_list: this.state.master_video_list,
@@ -157,10 +157,7 @@ var VideoList = function (_React$Component) {
           { className: 'inner-video-list-container' },
           _react2.default.createElement(
             'div',
-            {
-              className: 'inner-video-list-scroll-area-container',
-              style: { height: this.state.inner_video_list_container_height }
-            },
+            { className: 'inner-video-list-scroll-area-container' },
             this.state.filtered_video_list.map(function (v) {
               var _ref = v.snippet.thumbnails ? v.snippet.thumbnails.medium : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg',
                   url = _ref.url;

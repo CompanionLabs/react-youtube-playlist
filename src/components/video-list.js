@@ -89,7 +89,7 @@ class VideoList extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         <SearchBar
           master_video_list={this.state.master_video_list}
           handleUpdateFilteredVideos={this.handleUpdateFilteredVideos}
@@ -98,10 +98,7 @@ class VideoList extends React.Component {
           playlist_id={this.props.playlist_id}
         />
         <div className='inner-video-list-container'>
-          <div
-            className='inner-video-list-scroll-area-container'
-            style={{height : this.state.inner_video_list_container_height}}
-            >
+          <div className='inner-video-list-scroll-area-container'>
             {this.state.filtered_video_list.map(v => {
               const { url } = v.snippet.thumbnails ? v.snippet.thumbnails.medium : 'http://img.youtube.com/vi/dXo0LextZTU/sddefault.jpg';
               const { title, description } = v.snippet;
@@ -133,7 +130,7 @@ class VideoList extends React.Component {
             })}
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
