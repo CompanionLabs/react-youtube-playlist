@@ -11,6 +11,11 @@
     flex: 1;
     margin-top: 1em;
 
+    iframe {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 200px
+    }
     @media screen and (min-width: 768px) {
       margin-top: 0;
       display: inline-block;
@@ -114,11 +119,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   max-height: 140px;
 
   @media screen and (min-width: 768px) {
     display: block;
     overflow-x: unset;
+    overflow-y: unset;
     max-height: unset;
   }
 
