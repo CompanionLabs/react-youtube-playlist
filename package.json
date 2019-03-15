@@ -17,8 +17,8 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-youtube": "^7.9.0"
   },
   "dependencies": {
@@ -27,8 +27,8 @@
     "es6-promise": "^4.1.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-proptypes": "^1.0.0"
   },
   "devDependencies": {
